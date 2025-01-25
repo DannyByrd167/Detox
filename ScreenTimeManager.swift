@@ -29,8 +29,6 @@ extension DeviceActivityName {
     static let activity = Self("activity")
 }
 
-import Foundation
-
 class Detox: ObservableObject, Codable {
     @Published var detoxType: DetoxType
     @Published var startDate: Date
@@ -116,6 +114,8 @@ class ScreenTimeManager: Codable {
             // Encode and save the selection to app group
             if let encoded = try? JSONEncoder().encode(selectionToRestrict) {
                 sharedDefaults?.set(encoded, forKey: "restrictedApps")
+                print(sharedDefaults == nil)
+                print("Successfully Encoded Apps")
             }
         }
     }
@@ -167,12 +167,14 @@ class ScreenTimeManager: Codable {
         do {
             // Stop any existing monitoring
             deviceActivityCenter.stopMonitoring()
-            
             // Start new monitoring
             try deviceActivityCenter.startMonitoring(
                 .activity,
                 during: schedule
             )
+            
+            
+            print("Started Tracking??????")
             
         } catch {
             print("DEBUG: Error starting monitoring: \(error)")
@@ -183,7 +185,7 @@ class ScreenTimeManager: Codable {
         settings.clearAllSettings()
     }
     
-    func startDetox(type: DetoxType) {
+    static func startDetox(type: DetoxType) {
         //Start Detox
         let detox = Detox(detoxType: type, startDate: .now, currentDay: 1, isActive: true)
         if let encoded = try? JSONEncoder().encode(detox) {

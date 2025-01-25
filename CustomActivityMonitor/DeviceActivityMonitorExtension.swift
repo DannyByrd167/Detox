@@ -18,10 +18,6 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
     override func intervalDidStart(for activity: DeviceActivityName) {
         super.intervalDidStart(for: activity)
         
-        // Handle the start of the interval.
-        print("DEBUG: Interval did start for activity: \(activity)")
-        
-        // Get the selection from app group
         let sharedDefaults = UserDefaults(suiteName: "group.com.DannyByrd.detox")
         if let savedData = sharedDefaults?.data(forKey: "restrictedApps"),
            let selection = try? JSONDecoder().decode(FamilyActivitySelection.self, from: savedData) {
@@ -32,8 +28,6 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
     override func intervalDidEnd(for activity: DeviceActivityName) {
         super.intervalDidEnd(for: activity)
         
-        // Handle the end of the interval.
-        print("DEBUG: Interval did end for activity: \(activity)")
         addictingAppsStore.shield.applications = nil
     }
     

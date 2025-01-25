@@ -106,7 +106,7 @@ struct OnboardingView: View {
                                             restrictedApps: userInfo.restrictedAppsSelection
                                         )
                                         
-                                        ScreenTimeManager.startDetox(detox: .init(detoxType: userInfo.detoxSelection!, startDate: .now, currentDay: 1, isActive: true))
+                                        ScreenTimeManager.startDetox(type: userInfo.detoxSelection!)
                                     }
                                 }
                             } label: {
