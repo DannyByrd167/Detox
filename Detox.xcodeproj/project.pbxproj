@@ -1,0 +1,865 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF5C7C0D2D1E81E000C7CEAD /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5C7C0C2D1E81E000C7CEAD /* ManagedSettings.framework */; };
+		BF5C7C0F2D1E81E000C7CEAD /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5C7C0E2D1E81E000C7CEAD /* ManagedSettingsUI.framework */; };
+		BF5C7C172D1E81E000C7CEAD /* CustomShieldExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BF5C7C0A2D1E81E000C7CEAD /* CustomShieldExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFE599602D1FF21A009F696B /* ScreenTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE599592D1FF21A009F696B /* ScreenTimeManager.swift */; };
+		BFE5996C2D1FF377009F696B /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE5996B2D1FF377009F696B /* DeviceActivity.framework */; };
+		BFE599742D1FF378009F696B /* CustomActivityMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BFE5996A2D1FF377009F696B /* CustomActivityMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFE5997A2D1FF603009F696B /* ScreenTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE599592D1FF21A009F696B /* ScreenTimeManager.swift */; };
+		BFE599E02D22163B009F696B /* CustomActivityMonitorReport.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = BFE599D42D22163B009F696B /* CustomActivityMonitorReport.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BFE599E62D221853009F696B /* ScreenTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE599592D1FF21A009F696B /* ScreenTimeManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BF5C7C152D1E81E000C7CEAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF5C7BE92D1E632100C7CEAD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF5C7C092D1E81E000C7CEAD;
+			remoteInfo = CustomShieldExtension;
+		};
+		BFDB0EF32D3DC48F00DBCD98 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF5C7BE92D1E632100C7CEAD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFE599692D1FF377009F696B;
+			remoteInfo = CustomActivityMonitor;
+		};
+		BFDB0EF52D3DC49800DBCD98 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF5C7BE92D1E632100C7CEAD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFE599D32D22163B009F696B;
+			remoteInfo = CustomActivityMonitorReport;
+		};
+		BFE599722D1FF378009F696B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF5C7BE92D1E632100C7CEAD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFE599692D1FF377009F696B;
+			remoteInfo = CustomActivityMonitor;
+		};
+		BFE599DE2D22163B009F696B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF5C7BE92D1E632100C7CEAD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFE599D32D22163B009F696B;
+			remoteInfo = CustomActivityMonitorReport;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BF5C7C1C2D1E81E000C7CEAD /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BF5C7C172D1E81E000C7CEAD /* CustomShieldExtension.appex in Embed Foundation Extensions */,
+				BFE599742D1FF378009F696B /* CustomActivityMonitor.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFE599E52D22163B009F696B /* Embed ExtensionKit Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+				BFE599E02D22163B009F696B /* CustomActivityMonitorReport.appex in Embed ExtensionKit Extensions */,
+			);
+			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BF5C7BF12D1E632100C7CEAD /* Detox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Detox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF5C7C0A2D1E81E000C7CEAD /* CustomShieldExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomShieldExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF5C7C0C2D1E81E000C7CEAD /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
+		BF5C7C0E2D1E81E000C7CEAD /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = System/Library/Frameworks/ManagedSettingsUI.framework; sourceTree = SDKROOT; };
+		BFE599592D1FF21A009F696B /* ScreenTimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeManager.swift; sourceTree = "<group>"; };
+		BFE5996A2D1FF377009F696B /* CustomActivityMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFE5996B2D1FF377009F696B /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
+		BFE599D42D22163B009F696B /* CustomActivityMonitorReport.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = CustomActivityMonitorReport.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BF5C7C182D1E81E000C7CEAD /* Exceptions for "CustomShieldExtension" folder in "CustomShieldExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BF5C7C092D1E81E000C7CEAD /* CustomShieldExtension */;
+		};
+		BFE599772D1FF378009F696B /* Exceptions for "CustomActivityMonitor" folder in "CustomActivityMonitor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BFE599692D1FF377009F696B /* CustomActivityMonitor */;
+		};
+		BFE599E12D22163B009F696B /* Exceptions for "CustomActivityMonitorReport" folder in "CustomActivityMonitorReport" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BFE599D32D22163B009F696B /* CustomActivityMonitorReport */;
+		};
+		BFE59A132D2297AF009F696B /* Exceptions for "Detox" folder in "CustomActivityMonitor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				FamilyControlsPickerView.swift,
+			);
+			target = BFE599692D1FF377009F696B /* CustomActivityMonitor */;
+		};
+		BFE59A142D2297AF009F696B /* Exceptions for "Detox" folder in "CustomActivityMonitorReport" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				FamilyControlsPickerView.swift,
+			);
+			target = BFE599D32D22163B009F696B /* CustomActivityMonitorReport */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BF5C7BF32D1E632100C7CEAD /* Detox */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BFE59A132D2297AF009F696B /* Exceptions for "Detox" folder in "CustomActivityMonitor" target */,
+				BFE59A142D2297AF009F696B /* Exceptions for "Detox" folder in "CustomActivityMonitorReport" target */,
+			);
+			path = Detox;
+			sourceTree = "<group>";
+		};
+		BF5C7C102D1E81E000C7CEAD /* CustomShieldExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BF5C7C182D1E81E000C7CEAD /* Exceptions for "CustomShieldExtension" folder in "CustomShieldExtension" target */,
+			);
+			path = CustomShieldExtension;
+			sourceTree = "<group>";
+		};
+		BFE5996D2D1FF377009F696B /* CustomActivityMonitor */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BFE599772D1FF378009F696B /* Exceptions for "CustomActivityMonitor" folder in "CustomActivityMonitor" target */,
+			);
+			path = CustomActivityMonitor;
+			sourceTree = "<group>";
+		};
+		BFE599D52D22163B009F696B /* CustomActivityMonitorReport */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BFE599E12D22163B009F696B /* Exceptions for "CustomActivityMonitorReport" folder in "CustomActivityMonitorReport" target */,
+			);
+			path = CustomActivityMonitorReport;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF5C7BEE2D1E632100C7CEAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF5C7C072D1E81E000C7CEAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF5C7C0D2D1E81E000C7CEAD /* ManagedSettings.framework in Frameworks */,
+				BF5C7C0F2D1E81E000C7CEAD /* ManagedSettingsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFE599672D1FF377009F696B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFE5996C2D1FF377009F696B /* DeviceActivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFE599D12D22163B009F696B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF5C7BE82D1E632100C7CEAD = {
+			isa = PBXGroup;
+			children = (
+				BFE599592D1FF21A009F696B /* ScreenTimeManager.swift */,
+				BF5C7BF32D1E632100C7CEAD /* Detox */,
+				BF5C7C102D1E81E000C7CEAD /* CustomShieldExtension */,
+				BFE5996D2D1FF377009F696B /* CustomActivityMonitor */,
+				BFE599D52D22163B009F696B /* CustomActivityMonitorReport */,
+				BF5C7C0B2D1E81E000C7CEAD /* Frameworks */,
+				BF5C7BF22D1E632100C7CEAD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF5C7BF22D1E632100C7CEAD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF5C7BF12D1E632100C7CEAD /* Detox.app */,
+				BF5C7C0A2D1E81E000C7CEAD /* CustomShieldExtension.appex */,
+				BFE5996A2D1FF377009F696B /* CustomActivityMonitor.appex */,
+				BFE599D42D22163B009F696B /* CustomActivityMonitorReport.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF5C7C0B2D1E81E000C7CEAD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF5C7C0C2D1E81E000C7CEAD /* ManagedSettings.framework */,
+				BF5C7C0E2D1E81E000C7CEAD /* ManagedSettingsUI.framework */,
+				BFE5996B2D1FF377009F696B /* DeviceActivity.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF5C7BF02D1E632100C7CEAD /* Detox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF5C7BFF2D1E632300C7CEAD /* Build configuration list for PBXNativeTarget "Detox" */;
+			buildPhases = (
+				BF5C7BED2D1E632100C7CEAD /* Sources */,
+				BF5C7BEE2D1E632100C7CEAD /* Frameworks */,
+				BF5C7BEF2D1E632100C7CEAD /* Resources */,
+				BF5C7C1C2D1E81E000C7CEAD /* Embed Foundation Extensions */,
+				BFE599E52D22163B009F696B /* Embed ExtensionKit Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF5C7C162D1E81E000C7CEAD /* PBXTargetDependency */,
+				BFE599732D1FF378009F696B /* PBXTargetDependency */,
+				BFE599DF2D22163B009F696B /* PBXTargetDependency */,
+				BFDB0EF42D3DC48F00DBCD98 /* PBXTargetDependency */,
+				BFDB0EF62D3DC49800DBCD98 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BF5C7BF32D1E632100C7CEAD /* Detox */,
+			);
+			name = Detox;
+			packageProductDependencies = (
+			);
+			productName = Detox;
+			productReference = BF5C7BF12D1E632100C7CEAD /* Detox.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BF5C7C092D1E81E000C7CEAD /* CustomShieldExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF5C7C192D1E81E000C7CEAD /* Build configuration list for PBXNativeTarget "CustomShieldExtension" */;
+			buildPhases = (
+				BF5C7C062D1E81E000C7CEAD /* Sources */,
+				BF5C7C072D1E81E000C7CEAD /* Frameworks */,
+				BF5C7C082D1E81E000C7CEAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BF5C7C102D1E81E000C7CEAD /* CustomShieldExtension */,
+			);
+			name = CustomShieldExtension;
+			packageProductDependencies = (
+			);
+			productName = CustomShieldExtension;
+			productReference = BF5C7C0A2D1E81E000C7CEAD /* CustomShieldExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		BFE599692D1FF377009F696B /* CustomActivityMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFE599782D1FF378009F696B /* Build configuration list for PBXNativeTarget "CustomActivityMonitor" */;
+			buildPhases = (
+				BFE599662D1FF377009F696B /* Sources */,
+				BFE599672D1FF377009F696B /* Frameworks */,
+				BFE599682D1FF377009F696B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BFE5996D2D1FF377009F696B /* CustomActivityMonitor */,
+			);
+			name = CustomActivityMonitor;
+			packageProductDependencies = (
+			);
+			productName = CustomActivityMonitor;
+			productReference = BFE5996A2D1FF377009F696B /* CustomActivityMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		BFE599D32D22163B009F696B /* CustomActivityMonitorReport */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFE599E22D22163B009F696B /* Build configuration list for PBXNativeTarget "CustomActivityMonitorReport" */;
+			buildPhases = (
+				BFE599D02D22163B009F696B /* Sources */,
+				BFE599D12D22163B009F696B /* Frameworks */,
+				BFE599D22D22163B009F696B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BFE599D52D22163B009F696B /* CustomActivityMonitorReport */,
+			);
+			name = CustomActivityMonitorReport;
+			packageProductDependencies = (
+			);
+			productName = CustomActivityMonitorReport;
+			productReference = BFE599D42D22163B009F696B /* CustomActivityMonitorReport.appex */;
+			productType = "com.apple.product-type.extensionkit-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF5C7BE92D1E632100C7CEAD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					BF5C7BF02D1E632100C7CEAD = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					BF5C7C092D1E81E000C7CEAD = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					BFE599692D1FF377009F696B = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					BFE599D32D22163B009F696B = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = BF5C7BEC2D1E632100C7CEAD /* Build configuration list for PBXProject "Detox" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BF5C7BE82D1E632100C7CEAD;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BF5C7BF22D1E632100C7CEAD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF5C7BF02D1E632100C7CEAD /* Detox */,
+				BF5C7C092D1E81E000C7CEAD /* CustomShieldExtension */,
+				BFE599692D1FF377009F696B /* CustomActivityMonitor */,
+				BFE599D32D22163B009F696B /* CustomActivityMonitorReport */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF5C7BEF2D1E632100C7CEAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF5C7C082D1E81E000C7CEAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFE599682D1FF377009F696B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFE599D22D22163B009F696B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF5C7BED2D1E632100C7CEAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFE599602D1FF21A009F696B /* ScreenTimeManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF5C7C062D1E81E000C7CEAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFE599662D1FF377009F696B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFE5997A2D1FF603009F696B /* ScreenTimeManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFE599D02D22163B009F696B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFE599E62D221853009F696B /* ScreenTimeManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF5C7C162D1E81E000C7CEAD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF5C7C092D1E81E000C7CEAD /* CustomShieldExtension */;
+			targetProxy = BF5C7C152D1E81E000C7CEAD /* PBXContainerItemProxy */;
+		};
+		BFDB0EF42D3DC48F00DBCD98 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFE599692D1FF377009F696B /* CustomActivityMonitor */;
+			targetProxy = BFDB0EF32D3DC48F00DBCD98 /* PBXContainerItemProxy */;
+		};
+		BFDB0EF62D3DC49800DBCD98 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFE599D32D22163B009F696B /* CustomActivityMonitorReport */;
+			targetProxy = BFDB0EF52D3DC49800DBCD98 /* PBXContainerItemProxy */;
+		};
+		BFE599732D1FF378009F696B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFE599692D1FF377009F696B /* CustomActivityMonitor */;
+			targetProxy = BFE599722D1FF378009F696B /* PBXContainerItemProxy */;
+		};
+		BFE599DF2D22163B009F696B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFE599D32D22163B009F696B /* CustomActivityMonitorReport */;
+			targetProxy = BFE599DE2D22163B009F696B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BF5C7BFD2D1E632300C7CEAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BF5C7BFE2D1E632300C7CEAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BF5C7C002D1E632300C7CEAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Detox/Detox.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Detox/Preview Content\"";
+				DEVELOPMENT_TEAM = JCY34ZWF85;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DannyByrd.Detox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BF5C7C012D1E632300C7CEAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Detox/Detox.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Detox/Preview Content\"";
+				DEVELOPMENT_TEAM = JCY34ZWF85;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DannyByrd.Detox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BF5C7C1A2D1E81E000C7CEAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomShieldExtension/CustomShieldExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JCY34ZWF85;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CustomShieldExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CustomShieldExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DannyByrd.Detox.CustomShieldExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BF5C7C1B2D1E81E000C7CEAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomShieldExtension/CustomShieldExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JCY34ZWF85;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CustomShieldExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CustomShieldExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DannyByrd.Detox.CustomShieldExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BFE599752D1FF378009F696B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomActivityMonitor/CustomActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = JCY34ZWF85;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CustomActivityMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CustomActivityMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DannyByrd.Detox.CustomActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFE599762D1FF378009F696B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomActivityMonitor/CustomActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = JCY34ZWF85;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CustomActivityMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CustomActivityMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DannyByrd.Detox.CustomActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BFE599E32D22163B009F696B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomActivityMonitorReport/CustomActivityMonitorReport.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JCY34ZWF85;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CustomActivityMonitorReport/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CustomActivityMonitorReport;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DannyByrd.Detox.CustomActivityMonitorReport;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFE599E42D22163B009F696B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomActivityMonitorReport/CustomActivityMonitorReport.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JCY34ZWF85;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CustomActivityMonitorReport/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CustomActivityMonitorReport;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DannyByrd.Detox.CustomActivityMonitorReport;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF5C7BEC2D1E632100C7CEAD /* Build configuration list for PBXProject "Detox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF5C7BFD2D1E632300C7CEAD /* Debug */,
+				BF5C7BFE2D1E632300C7CEAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF5C7BFF2D1E632300C7CEAD /* Build configuration list for PBXNativeTarget "Detox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF5C7C002D1E632300C7CEAD /* Debug */,
+				BF5C7C012D1E632300C7CEAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF5C7C192D1E81E000C7CEAD /* Build configuration list for PBXNativeTarget "CustomShieldExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF5C7C1A2D1E81E000C7CEAD /* Debug */,
+				BF5C7C1B2D1E81E000C7CEAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFE599782D1FF378009F696B /* Build configuration list for PBXNativeTarget "CustomActivityMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFE599752D1FF378009F696B /* Debug */,
+				BFE599762D1FF378009F696B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFE599E22D22163B009F696B /* Build configuration list for PBXNativeTarget "CustomActivityMonitorReport" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFE599E32D22163B009F696B /* Debug */,
+				BFE599E42D22163B009F696B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BF5C7BE92D1E632100C7CEAD /* Project object */;
+}
