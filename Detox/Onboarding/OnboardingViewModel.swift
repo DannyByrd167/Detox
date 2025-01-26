@@ -3,6 +3,8 @@ import FamilyControls
 
 @Observable
 class OnboardingViewModel {
+    var hasCompletedDetox: Bool = UserDefaults(suiteName: "group.com.DannyByrd.detox")?.bool(forKey: "isDetoxOver") ?? false
+    
     var hasCompletedOnboarding: Bool = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
     var startDate: Date? = UserDefaults.standard.object(forKey: "startTime") as? Date
     var currentDetox: DetoxType? = DetoxType(rawValue: UserDefaults.standard.string(forKey: "currentDetox") ?? "")

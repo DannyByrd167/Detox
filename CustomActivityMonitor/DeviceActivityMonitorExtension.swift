@@ -29,6 +29,8 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
         super.intervalDidEnd(for: activity)
         
         addictingAppsStore.shield.applications = nil
+        let sharedDefaults = UserDefaults(suiteName: "group.com.DannyByrd.detox")
+        sharedDefaults?.set(true, forKey: "isDetoxOver")
     }
     
     override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {

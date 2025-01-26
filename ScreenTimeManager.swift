@@ -152,15 +152,15 @@ class ScreenTimeManager: Codable {
         case .month:
             DeviceActivitySchedule(
                 intervalStart: DateComponents(hour: 0),
-                intervalEnd: DateComponents(hour: 23, minute: 59, second: 59),
-                repeats: true
+                intervalEnd: DateComponents(day: 30, hour: 23, minute: 59, second: 59),
+                repeats: false
             )
             
         default:
             DeviceActivitySchedule(
                 intervalStart: DateComponents(hour: 0),
-                intervalEnd: DateComponents(hour: 23, minute: 59, second: 59),
-                repeats: true
+                intervalEnd: DateComponents(hour: 2),
+                repeats: false
             )
         }
         
