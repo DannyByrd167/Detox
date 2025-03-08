@@ -103,7 +103,6 @@ class DetoxGoal: Codable, ObservableObject {
     }
 }
 
-
 class ScreenTimeManager: Codable {
     static let settings = ManagedSettingsStore(named: .addictingApps)
     static let center = AuthorizationCenter.shared
@@ -138,11 +137,20 @@ class ScreenTimeManager: Codable {
         
     }
     
-    static func startDetox(detox: Detox) {
+    static func removeRestriction() {
+        settings.clearAllSettings()
+    }
+    
+    static func startDetox(type: DetoxType) {
+        //Start Detox
         settings.clearAllSettings()
         
         // Create a schedule based on the detox start and end dates
-        let schedule = switch detox.detoxType {
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: .now)
+        let dayLater = Date.now.addingTimeInterval(60*60*24)
+        let dayLaterComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: dayLater)
+        
+        let schedule = switch type {
         case .week:
             DeviceActivitySchedule(
                 intervalStart: DateComponents(hour: 0),
@@ -155,11 +163,10 @@ class ScreenTimeManager: Codable {
                 intervalEnd: DateComponents(day: 30, hour: 23, minute: 59, second: 59),
                 repeats: false
             )
-            
         default:
             DeviceActivitySchedule(
-                intervalStart: DateComponents(hour: 0),
-                intervalEnd: DateComponents(hour: 2),
+                intervalStart: dateComponents,
+                intervalEnd: dayLaterComponents,
                 repeats: false
             )
         }
@@ -173,26 +180,8 @@ class ScreenTimeManager: Codable {
                 during: schedule
             )
             
-            
-            print("Started Tracking??????")
-            
         } catch {
             print("DEBUG: Error starting monitoring: \(error)")
-        }
-    }
-    
-    static func removeRestriction() {
-        settings.clearAllSettings()
-    }
-    
-    static func startDetox(type: DetoxType) {
-        //Start Detox
-        let detox = Detox(detoxType: type, startDate: .now, currentDay: 1, isActive: true)
-        if let encoded = try? JSONEncoder().encode(detox) {
-            UserDefaults.standard.set(encoded, forKey: "currentDetox")
-            ScreenTimeManager.startDetox(detox: detox)
-        } else {
-            print("HELPPPPPPP needed at start detox")
         }
     }
     

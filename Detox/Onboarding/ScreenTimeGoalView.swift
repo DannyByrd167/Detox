@@ -38,7 +38,7 @@ struct ScreenTimeGoalView: View {
                     .frame(height: 90)
                     .overlay {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 20)                                .stroke(screenTimeGoals.contains(.improveFocus) ? .white : .clear, lineWidth: 5)
+                            RoundedRectangle(cornerRadius: 20) .stroke(screenTimeGoals.contains(.improveFocus) ? .white : .clear, lineWidth: 5)
                             
                             HStack {
                                 Spacer()

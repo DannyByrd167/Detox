@@ -19,28 +19,16 @@ struct OnboardingData: Codable {
     var startTime: Date?
     var hasCompletedOnboarding: Bool
     var screenTimeEstimate: Int?
-    var restrictedAppsSelection: FamilyActivitySelection
+    var goals: [ScreenTimeGoal]
 }
 
-@Observable class OnboardingInfo {
+@Observable
+class OnboardingInfo {
     var onboardingStage = OnboardingScreens.whatsYourScreenTime
     var currentScreenTimeEstimate: Int?
     var screenTimeGoal = Set<ScreenTimeGoal>()
     var detoxSelection: DetoxType?
     var restrictedAppsSelection = FamilyActivitySelection()
-    
-    func saveToUserDefaults() {
-        let data = OnboardingData(
-            currentDetox: detoxSelection,
-            startTime: .now,
-            hasCompletedOnboarding: true,
-            screenTimeEstimate: currentScreenTimeEstimate,
-            restrictedAppsSelection: restrictedAppsSelection
-        )
-        if let encoded = try? JSONEncoder().encode(data) {
-            UserDefaults.standard.set(encoded, forKey: "onboardingData")
-        }
-    }
 }
 
 struct OnboardingView: View {
@@ -102,11 +90,10 @@ struct OnboardingView: View {
                                             startDate: .now,
                                             detoxType: detoxType,
                                             screenTimeEstimate: screenTimeEstimate,
-                                            screenTimeGoal: userInfo.screenTimeGoal, // Pass the goals
-                                            restrictedApps: userInfo.restrictedAppsSelection
-                                        )
+                                            screenTimeGoal: userInfo.screenTimeGoal                                        )
                                         
-                                        ScreenTimeManager.startDetox(type: userInfo.detoxSelection!)
+                                        ScreenTimeManager.startDetox(type: detoxType)
+                                        ScreenTimeManager.setRestriction()
                                     }
                                 }
                             } label: {

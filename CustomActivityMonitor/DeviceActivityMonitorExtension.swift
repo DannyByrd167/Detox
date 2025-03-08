@@ -23,6 +23,7 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
            let selection = try? JSONDecoder().decode(FamilyActivitySelection.self, from: savedData) {
             addictingAppsStore.shield.applications = selection.applicationTokens
         }
+        sharedDefaults?.set(true, forKey: "isDetoxOver")
     }
     
     override func intervalDidEnd(for activity: DeviceActivityName) {

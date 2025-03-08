@@ -10,7 +10,6 @@ import DeviceActivity
 
 struct ScreenTimeSummaryView: View {
     @State private var context: DeviceActivityReport.Context = .totalActivity
-    
     @State private var filter = DeviceActivityFilter(
         segment: .daily(during: DateInterval(start: Calendar.current.startOfDay(for: .now), end: .now)),
         users: .all,

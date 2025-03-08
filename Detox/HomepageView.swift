@@ -23,9 +23,10 @@ struct CustomText: ViewModifier {
 }
 
 struct HomepageView: View {
-    @ObservedObject var detox: Detox
+    @State var detox: Detox
     @State var hasCompletedDetox: Bool
     @State var isGettingMotivation = false
+    @State var detoxTimeInterval: Int?
     
     init(viewModel: OnboardingViewModel) {
         let startDate = viewModel.startDate ?? Date.now
@@ -33,24 +34,31 @@ struct HomepageView: View {
         let startOfStartDay = calendar.startOfDay(for: startDate)
         let startOfNow = calendar.startOfDay(for: Date.now)
         let daysDifference = calendar.dateComponents([.day], from: startOfStartDay, to: startOfNow).day ?? 0
-        let currentDay = daysDifference + 1 // Starts at 1
-
+        let currentDay = daysDifference + 1
+        
         detox = .init(
-            detoxType: viewModel.currentDetox ?? .day,
+            detoxType: viewModel.currentDetoxType ?? .day,
             startDate: startDate,
             currentDay: currentDay,
             detoxGoals: [],
             isActive: false
         )
         
-        hasCompletedDetox = viewModel.hasCompletedDetox
+        switch viewModel.currentDetoxType {
+        case .week:
+            detoxTimeInterval = 604800
+        case .month:
+            detoxTimeInterval = 2592000
+        case .day:
+            detoxTimeInterval = 86400
+        case .none:
+            detoxTimeInterval = nil
+        }
         
-        checkDetox()
+        hasCompletedDetox = viewModel.hasCompletedDetox
     }
     
     var timeSinceStartDetox: Double {
-//        guard let detox else { return 0 }
-        
         return Double(Date().timeIntervalSince(detox.startDate))
     }
 
@@ -76,192 +84,170 @@ struct HomepageView: View {
                         .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.65))
                         .ignoresSafeArea()
                     
-                    VStack {
+                    ScrollView {
                         VStack {
-                            HStack {
-                                Text("Current Detox:")
-                                    .customTextStyle(size: 20)
-                                
-                                Spacer()
-                                
-                                timeSinceStartFormatted()
-                                    .customTextStyle(size: 14)
-                            }
-                            
-                            //TODO: Update Gauge For Month Detox
-                            Gauge(value: timeSinceStartDetox, in: 0...604800) {}
-                                .tint(Color(#colorLiteral(red: 0.051, green: 0.969, blue: 0.263, alpha: 1)))
-                                .background(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)))
-                                )
-                            
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
-                        )
-                        .padding(.horizontal)
-                        .padding(.top)
-                        
-                        VStack {
-                            HStack {
-                                Text("Today's Challenges:")
-                                    .customTextStyle(size: 20)
-                                
-                                Spacer()
-                            }
-                            ForEach(detox.detoxGoals, id: \.name) { goal in
-                                Button {
-                                    //mark goal as completed
-                                    withAnimation {
-                                        goal.isCompleted.toggle()
-                                    }
-                                } label: {
-                                    HStack {
-                                        Image(systemName: goal.isCompleted ? "checkmark.circle" : "circle")
-                                            .resizable()
-                                            .frame(width: 30, height: 30)
-                                            .scaledToFit()
-                                            .foregroundStyle(.white)
-                                            .contentTransition(.symbolEffect)
-                                        
-                                        Text(goal.name)
-                                            .customTextStyle(size: 24)
-                                        
-                                        Spacer()
-                                    }
-                                }
-                            }
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
-                        )
-                        .padding(.horizontal)
-                        
-                        VStack {
-                            HStack {
-                                Text(isGettingMotivation ? "How are you feeling?" : "Need support?")
-                                    .customTextStyle(size: 20)
-                                
-                                Spacer()
-                            }
-                            
-                            if isGettingMotivation {
+                            VStack {
                                 HStack {
-                                    Button {
-                                        
-                                    } label: {
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                            .overlay {
-                                                VStack {
-                                                    Text("😑")
-                                                        .customTextStyle(size: 64)
-                                                        .padding(0)
-                                                    
-                                                    Text("Bored")
-                                                        .customTextStyle(size: 20)
-                                                }
-                                            }
-                                    }
+                                    Text("Current Detox:")
+                                        .customTextStyle(size: 20)
                                     
-                                    Button {
-                                        
-                                    } label: {
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                            .overlay {
-                                                VStack {
-                                                    Text("😵‍💫")
-                                                        .customTextStyle(size: 64)
-                                                        .padding(0)
-                                                    
-                                                    Text("Stressed")
-                                                        .customTextStyle(size: 20)
-                                                }
-                                            }
-                                    }
+                                    Spacer()
                                     
-                                    Button {
-                                        
-                                    } label: {
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                            
-                                            .overlay {
-                                                VStack {
-                                                    Text("😰")
-                                                        .customTextStyle(size: 64)
-                                                        .padding(0)
-                                                    
-                                                    Text("Lonely")
-                                                        .customTextStyle(size: 20)
-                                                }
-                                            }
-                                    }
+                                    timeSinceStartFormatted()
+                                        .customTextStyle(size: 14)
                                 }
-                                .frame(height: 100)
-                            } else {
-                                Button {
-                                    withAnimation {
-                                        isGettingMotivation.toggle()
-                                    }
-                                } label: {
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 60)
-                                        .overlay {
-                                            Text("Get some motivation")
-                                                .customTextStyle(size: 24)
-                                        }
-                                    
-                                    
-                                }
-                                .disabled(isGettingMotivation)
+                                
+                                
+                                Gauge(value: timeSinceStartDetox, in: 0...Double(detoxTimeInterval ?? 0)) {}
+                                    .tint(Color(#colorLiteral(red: 0.051, green: 0.969, blue: 0.263, alpha: 1)))
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)))
+                                    )
                             }
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
-                        )
-                        .padding(.horizontal)
-                        
-                        VStack {
-                            HStack {
-                                Text("Top apps used:")
-                                    .customTextStyle(size: 20)
-                                Spacer()
-                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
+                            )
+                            .padding(.horizontal)
+                            .padding(.top)
                             
-                            ScreenTimeSummaryView()
-                                .frame(height: 200)
+                            VStack {
+                                HStack {
+                                    Text(isGettingMotivation ? "How are you feeling?" : "Need support?")
+                                        .customTextStyle(size: 20)
+                                    
+                                    Spacer()
+                                    
+                                    if isGettingMotivation {
+                                        Button {
+                                            withAnimation {
+                                                isGettingMotivation.toggle()
+                                            }
+                                        } label: {
+                                            Image(systemName: "x.circle")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 30, height: 30)
+                                                .foregroundStyle(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)))
+                                        }
+                                    }
+                                }
+                                
+                                if isGettingMotivation {
+                                    HStack {
+                                        Button {
+                                            
+                                        } label: {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
+                                                .overlay {
+                                                    VStack {
+                                                        Text("😑")
+                                                            .customTextStyle(size: 64)
+                                                            .padding(0)
+                                                        
+                                                        Text("Bored")
+                                                            .customTextStyle(size: 20)
+                                                    }
+                                                }
+                                        }
+                                        
+                                        Button {
+                                            
+                                        } label: {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
+                                                .overlay {
+                                                    VStack {
+                                                        Text("😵‍💫")
+                                                            .customTextStyle(size: 64)
+                                                            .padding(0)
+                                                        
+                                                        Text("Stressed")
+                                                            .customTextStyle(size: 20)
+                                                    }
+                                                }
+                                        }
+                                        
+                                        Button {
+                                            
+                                        } label: {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
+                                            
+                                                .overlay {
+                                                    VStack {
+                                                        Text("😰")
+                                                            .customTextStyle(size: 64)
+                                                            .padding(0)
+                                                        
+                                                        Text("Lonely")
+                                                            .customTextStyle(size: 20)
+                                                    }
+                                                }
+                                        }
+                                    }
+                                    .frame(height: 100)
+                                } else {
+                                    Button {
+                                        withAnimation {
+                                            isGettingMotivation.toggle()
+                                        }
+                                    } label: {
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
+                                            .frame(maxWidth: .infinity)
+                                            .frame(height: 60)
+                                            .overlay {
+                                                Text("Get some motivation")
+                                                    .customTextStyle(size: 24)
+                                            }
+                                        
+                                        
+                                    }
+                                    .disabled(isGettingMotivation)
+                                }
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
+                            )
+                            .padding(.horizontal)
+                            
+                            VStack {
+                                HStack {
+                                    Text("Top apps used today:")
+                                        .customTextStyle(size: 20)
+                                    Spacer()
+                                }
+                                
+                                ScreenTimeSummaryView()
+                                    .frame(height: 170)
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
+                            )
+                            .padding(.horizontal)
+                            
+                            Spacer()
                         }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
-                        )
-                        .padding(.horizontal)
-                        
-                        Spacer()
                     }
+                    .offset(y: 8)
                 }
             }
         }
         .sheet(isPresented: $hasCompletedDetox, onDismiss: {
-            UserDefaults(suiteName: "group.com.DannyByrd.detox")?.removeObject(forKey: "hasCompletedDetox")
+            print("Dismissed")
+            UserDefaults(suiteName: "group.com.DannyByrd.detox")?.set(false, forKey: "hasCompletedDetox")
         }, content: {
-            Color.red
+            CompletedDetoxView()
+                .interactiveDismissDisabled()
         })
-        .onAppear {
-            checkDetox()
-        }
     }
     
     func timeSinceStartFormatted() -> Text {
@@ -276,46 +262,9 @@ struct HomepageView: View {
             return Text("^[\(timeSinceStartDays) day](inflect: true) \(timeSinceStartHrs) hr \(timeSinceStartMinutes) min")
         }
     }
-    
-    
-    
-    func checkDetox() {
-        let data = UserDefaults.standard.data(forKey: "currentDetox")
-        do {
-            if let data {
-                let decodedDetox = try JSONDecoder().decode(Detox.self, from: data)
-                
-                //seconds duration of detox type: e.g 1 Week = 60*60*24*7 seconds
-                var timeToAdd: TimeInterval {
-                    switch decodedDetox.detoxType {
-                        case .week:
-                            60*60*24*7
-                        case .month:
-                            60*60*24*30
-                        case .day:
-                            60*60*24
-                    }
-                }
-                
-                if (Calendar.current.compare(.now, to: decodedDetox.startDate.addingTimeInterval(timeToAdd), toGranularity: .nanosecond).rawValue > 0) {
-                    print("Finished Detox")
-                    
-                    //TODO: Process Finishing Detox Celebration
-                    ScreenTimeManager.removeRestriction()
-                    UserDefaults.standard.removeObject(forKey: "currentDetox")
-                } else {
-                    detox.detoxType = decodedDetox.detoxType
-                }
-            } else {
-                ScreenTimeManager.removeRestriction()
-            }
-            
-        } catch {
-            print(error)
-        }
-    }
 }
 
 #Preview {
     HomepageView(viewModel: .init())
 }
+

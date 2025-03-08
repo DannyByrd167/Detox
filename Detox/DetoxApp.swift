@@ -15,7 +15,9 @@ struct DetoxApp: App {
     var body: some Scene {
         WindowGroup {
             if viewModel.hasCompletedOnboarding {
-                HomepageView(viewModel: viewModel)
+                if viewModel.currentDetoxType != nil {
+                    HomepageView(viewModel: viewModel)
+                }
             } else {
                 OnboardingView(viewModel: viewModel)
             }
