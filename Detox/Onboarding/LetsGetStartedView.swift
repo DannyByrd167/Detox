@@ -25,9 +25,13 @@ struct LetsGetStartedView: View {
             
             Button {
                 Task {
-                    await ScreenTimeManager.requestAuthorization()
-                    withAnimation {
-                        activeButton += 1
+                    let success = await ScreenTimeManager.requestAuthorization()
+                    if success {
+                        withAnimation {
+                            activeButton += 1
+                        }
+                    } else {
+                        //Handle Failure
                     }
                 }
             } label: {
@@ -171,7 +175,7 @@ struct LetsGetStartedView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15)
                                 .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                .frame(height: 120)
+                                .frame(height: 70)
                                 .overlay {
                                     ZStack {
                                         VStack {
@@ -195,7 +199,7 @@ struct LetsGetStartedView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15)
                                 .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                .frame(height: 120)
+                                .frame(height: 70)
                                 .overlay {
                                     ZStack {
                                         VStack {
@@ -218,11 +222,9 @@ struct LetsGetStartedView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15)
                                 .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                .frame(height: 120)
+                                .frame(height: 70)
                                 .overlay {
                                     ZStack {
-                                        
-                                        
                                         VStack {
                                             Text("1 Month Detox")
                                                 .customTextStyle(size: 28)

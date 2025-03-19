@@ -15,30 +15,22 @@ enum ScreenTimeGoal: Codable {
 }
 
 struct ScreenTimeGoalView: View {
-    @Binding var screenTimeGoals: Set<ScreenTimeGoal>
+    @Binding var screenTimeGoal: ScreenTimeGoal?
     
     var body: some View {
         VStack {
-            Text("What's Your Goal")
+            Text("What's Your Main Goal?")
                 .customTextStyle(size: 32)
             
-            Text("Select at least one")
-                .foregroundStyle(Color(#colorLiteral(red: 0.769, green: 0.769, blue: 0.769, alpha: 1)))
-                .font(.system(size: 14, weight: .medium, design: .rounded))
-            
             Button {
-                if screenTimeGoals.contains(.improveFocus) {
-                    screenTimeGoals.remove(.improveFocus)
-                } else {
-                    screenTimeGoals.insert(.improveFocus)
-                }
+                screenTimeGoal = .improveFocus
             } label: {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
                     .frame(height: 90)
                     .overlay {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 20) .stroke(screenTimeGoals.contains(.improveFocus) ? .white : .clear, lineWidth: 5)
+                            RoundedRectangle(cornerRadius: 20) .stroke(screenTimeGoal == .improveFocus ? .white : .clear, lineWidth: 5)
                             
                             HStack {
                                 Spacer()
@@ -61,18 +53,14 @@ struct ScreenTimeGoalView: View {
             }
             
             Button {
-                if screenTimeGoals.contains(.buildBetterHabits) {
-                    screenTimeGoals.remove(.buildBetterHabits)
-                } else {
-                    screenTimeGoals.insert(.buildBetterHabits)
-                }
+                screenTimeGoal = .buildBetterHabits
             } label: {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
                     .frame(height: 90)
                     .overlay {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 20)                                .stroke(screenTimeGoals.contains(.buildBetterHabits) ? .white : .clear, lineWidth: 5)
+                            RoundedRectangle(cornerRadius: 20)                                .stroke(screenTimeGoal == .buildBetterHabits ? .white : .clear, lineWidth: 5)
                             
                             HStack {
                                 Spacer()
@@ -95,18 +83,14 @@ struct ScreenTimeGoalView: View {
             }
             
             Button {
-                if screenTimeGoals.contains(.reclaimTime) {
-                    screenTimeGoals.remove(.reclaimTime)
-                } else {
-                    screenTimeGoals.insert(.reclaimTime)
-                }
+                screenTimeGoal = .reclaimTime
             } label: {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
                     .frame(height: 90)
                     .overlay {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 20)                  .stroke(screenTimeGoals.contains(.reclaimTime) ? .white : .clear, lineWidth: 5)
+                            RoundedRectangle(cornerRadius: 20)                  .stroke(screenTimeGoal == .reclaimTime ? .white : .clear, lineWidth: 5)
                             
                             HStack {
                                 Spacer()
@@ -129,18 +113,14 @@ struct ScreenTimeGoalView: View {
             }
             
             Button {
-                if screenTimeGoals.contains(.improveMentalHealth) {
-                    screenTimeGoals.remove(.improveMentalHealth)
-                } else {
-                    screenTimeGoals.insert(.improveMentalHealth)
-                }
+                screenTimeGoal = .improveMentalHealth
             } label: {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
                     .frame(height: 90)
                     .overlay {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 20)                                .stroke(screenTimeGoals.contains(.improveMentalHealth) ? .white : .clear, lineWidth: 5)
+                            RoundedRectangle(cornerRadius: 20)                                .stroke(screenTimeGoal == .improveMentalHealth ? .white : .clear, lineWidth: 5)
                             
                             HStack {
                                 Spacer()
@@ -168,5 +148,5 @@ struct ScreenTimeGoalView: View {
 }
 
 #Preview {
-    ScreenTimeGoalView(screenTimeGoals: .constant([]))
+    ScreenTimeGoalView(screenTimeGoal: .constant(.reclaimTime))
 }

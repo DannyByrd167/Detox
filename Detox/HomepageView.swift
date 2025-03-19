@@ -23,12 +23,16 @@ struct CustomText: ViewModifier {
 }
 
 struct HomepageView: View {
+    @State var viewModel: OnboardingViewModel
     @State var detox: Detox
     @State var hasCompletedDetox: Bool
     @State var isGettingMotivation = false
     @State var detoxTimeInterval: Int?
+    @State var journalVM: JournalViewModel
+    @AppStorage("tip") var tip = Tip.randomTip()
     
     init(viewModel: OnboardingViewModel) {
+        self.viewModel = viewModel
         let startDate = viewModel.startDate ?? Date.now
         let calendar = Calendar.current
         let startOfStartDay = calendar.startOfDay(for: startDate)
@@ -40,7 +44,6 @@ struct HomepageView: View {
             detoxType: viewModel.currentDetoxType ?? .day,
             startDate: startDate,
             currentDay: currentDay,
-            detoxGoals: [],
             isActive: false
         )
         
@@ -56,6 +59,16 @@ struct HomepageView: View {
         }
         
         hasCompletedDetox = viewModel.hasCompletedDetox
+        if let data = UserDefaults.standard.data(forKey: "journal\(startOfNow.formatted())") {
+            do {
+                let journal = try JSONDecoder().decode(JournalViewModel.self, from: data)
+                self.journalVM = journal
+            } catch {
+                self.journalVM = JournalViewModel()
+            }
+        } else {
+            self.journalVM = JournalViewModel()
+        }
     }
     
     var timeSinceStartDetox: Double {
@@ -63,191 +76,150 @@ struct HomepageView: View {
     }
 
     var body: some View {
-        ZStack {
-            Color(#colorLiteral(red: 0.216, green: 0.235, blue: 0.518, alpha: 1)) // #373c84
-                .ignoresSafeArea()
-            
-            VStack {
-                Text(String(detox.currentDay))
-                    .customTextStyle(size: 100)
-                    .contentTransition(.numericText())
-                    .padding(.horizontal)
-                    .background(
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.65))
-                        
-                    )
-                    .padding(.vertical)
+        NavigationStack {
+            ZStack {
+                Color(#colorLiteral(red: 0.216, green: 0.235, blue: 0.518, alpha: 1)) // #373c84
+                    .ignoresSafeArea()
                 
-                ZStack {
-                    RoundedRectangle(cornerRadius: 35)
-                        .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.65))
-                        .ignoresSafeArea()
+                VStack {
+                    Text(String(detox.currentDay))
+                        .customTextStyle(size: 100)
+                        .contentTransition(.numericText())
+                        .padding(.horizontal)
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.65))
+                            
+                        )
+                        .padding(.vertical)
                     
-                    ScrollView {
-                        VStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 35)
+                            .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.65))
+                            .ignoresSafeArea()
+                        
+                        ScrollView {
                             VStack {
-                                HStack {
-                                    Text("Current Detox:")
-                                        .customTextStyle(size: 20)
-                                    
-                                    Spacer()
-                                    
-                                    timeSinceStartFormatted()
-                                        .customTextStyle(size: 14)
-                                }
-                                
-                                
-                                Gauge(value: timeSinceStartDetox, in: 0...Double(detoxTimeInterval ?? 0)) {}
-                                    .tint(Color(#colorLiteral(red: 0.051, green: 0.969, blue: 0.263, alpha: 1)))
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)))
-                                    )
-                            }
-                            .padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
-                            )
-                            .padding(.horizontal)
-                            .padding(.top)
-                            
-                            VStack {
-                                HStack {
-                                    Text(isGettingMotivation ? "How are you feeling?" : "Need support?")
-                                        .customTextStyle(size: 20)
-                                    
-                                    Spacer()
-                                    
-                                    if isGettingMotivation {
-                                        Button {
-                                            withAnimation {
-                                                isGettingMotivation.toggle()
-                                            }
-                                        } label: {
-                                            Image(systemName: "x.circle")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 30, height: 30)
-                                                .foregroundStyle(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)))
-                                        }
-                                    }
-                                }
-                                
-                                if isGettingMotivation {
+                                VStack {
                                     HStack {
-                                        Button {
-                                            
-                                        } label: {
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                                .overlay {
-                                                    VStack {
-                                                        Text("😑")
-                                                            .customTextStyle(size: 64)
-                                                            .padding(0)
-                                                        
-                                                        Text("Bored")
-                                                            .customTextStyle(size: 20)
-                                                    }
-                                                }
-                                        }
+                                        Text("Current Detox:")
+                                            .customTextStyle(size: 20)
                                         
-                                        Button {
-                                            
-                                        } label: {
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                                .overlay {
-                                                    VStack {
-                                                        Text("😵‍💫")
-                                                            .customTextStyle(size: 64)
-                                                            .padding(0)
-                                                        
-                                                        Text("Stressed")
-                                                            .customTextStyle(size: 20)
-                                                    }
-                                                }
-                                        }
+                                        Spacer()
                                         
-                                        Button {
-                                            
-                                        } label: {
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                            
-                                                .overlay {
-                                                    VStack {
-                                                        Text("😰")
-                                                            .customTextStyle(size: 64)
-                                                            .padding(0)
-                                                        
-                                                        Text("Lonely")
-                                                            .customTextStyle(size: 20)
-                                                    }
-                                                }
-                                        }
+                                        timeSinceStartFormatted()
+                                            .customTextStyle(size: 14)
                                     }
-                                    .frame(height: 100)
-                                } else {
-                                    Button {
-                                        withAnimation {
-                                            isGettingMotivation.toggle()
-                                        }
-                                    } label: {
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)).opacity(0.5))
-                                            .frame(maxWidth: .infinity)
-                                            .frame(height: 60)
-                                            .overlay {
-                                                Text("Get some motivation")
-                                                    .customTextStyle(size: 24)
-                                            }
-                                        
-                                        
-                                    }
-                                    .disabled(isGettingMotivation)
+                                    
+                                    
+                                    Gauge(value: timeSinceStartDetox, in: 0...Double(detoxTimeInterval ?? 0)) {}
+                                        .tint(Color(#colorLiteral(red: 0.051, green: 0.969, blue: 0.263, alpha: 1)))
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(Color(#colorLiteral(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)))
+                                        )
                                 }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
+                                )
+                                .padding(.horizontal)
+                                .padding(.top)
+                                
+                                VStack {
+                                    Text("Screen Time Tip:")
+                                        .customTextStyle(size: 24)
+                                    
+                                    Text(tip)
+                                        .customTextStyle(size: 20)
+                                        .multilineTextAlignment(.center)
+                                }
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
+                                )
+                                .padding(.horizontal)
+                                
+                                VStack {
+                                    HStack {
+                                        Text("Top apps used today:")
+                                            .customTextStyle(size: 20)
+                                        Spacer()
+                                    }
+                                    
+                                    ScreenTimeSummaryView()
+                                        .frame(height: 170)
+                                }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
+                                )
+                                .padding(.horizontal)
+                                
+                                Spacer()
                             }
-                            .padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
-                            )
-                            .padding(.horizontal)
                             
                             VStack {
-                                HStack {
-                                    Text("Top apps used today:")
-                                        .customTextStyle(size: 20)
-                                    Spacer()
+                                NavigationLink {
+                                    JournalView(vm: journalVM)
+                                        .navigationBarBackButtonHidden()
+                                        .onDisappear {
+                                            do {
+                                                withAnimation {
+                                                    journalVM.hasCompletedEntry = true
+                                                }
+                                                let data = try JSONEncoder().encode(journalVM)
+                                                let startOfToday = Calendar.current.startOfDay(for: .now).formatted()
+                                                UserDefaults.standard.set(data, forKey: "journal\(startOfToday)")
+                                            } catch {
+                                                print("Error encoding journal: \(error.localizedDescription)")
+                                            }
+                                        }
+                                } label: {
+                                    if journalVM.hasCompletedEntry {
+                                        Label("Daily Journal", image: "note.text.badge.checkmark")
+                                            .customTextStyle(size: 30)
+                                    } else {
+                                        Label("Daily Journal", systemImage: "note.text.badge.plus")
+                                            .customTextStyle(size: 30)
+                                    }
                                 }
-                                
-                                ScreenTimeSummaryView()
-                                    .frame(height: 170)
                             }
                             .padding()
+                            .frame(maxWidth: .infinity)
                             .background(
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(#colorLiteral(red: 0.365, green: 0.38, blue: 0.608, alpha: 1)))
                             )
                             .padding(.horizontal)
-                            
-                            Spacer()
                         }
+                        .offset(y: 8)
                     }
-                    .offset(y: 8)
                 }
             }
+            .fullScreenCover(isPresented: $hasCompletedDetox, onDismiss: {
+                print("Dismissed")
+                ScreenTimeManager.removeRestriction()
+                if let defaults = UserDefaults(suiteName: "group.com.DannyByrd.detox") {
+                    defaults.set(false, forKey: "isDetoxOver")
+                    print("IsDetoxOver: \(defaults.bool(forKey: "isDetoxOver"))")
+                    print("Finished detox")
+                } else {
+                    print("Didn't change")
+                }
+                UserDefaults.standard.removeObject(forKey: "currentDetox")
+                viewModel.currentDetoxType = nil
+                viewModel.hasCompletedDetox = false
+                UserDefaults.standard.removeObject(forKey: "journal\(Calendar.current.startOfDay(for: Date.now).formatted())")
+                journalVM = JournalViewModel()
+            }, content: {
+                CompletedDetoxView(length: detox.detoxType, startDate: detox.startDate)
+            })
         }
-        .sheet(isPresented: $hasCompletedDetox, onDismiss: {
-            print("Dismissed")
-            UserDefaults(suiteName: "group.com.DannyByrd.detox")?.set(false, forKey: "hasCompletedDetox")
-        }, content: {
-            CompletedDetoxView()
-                .interactiveDismissDisabled()
-        })
     }
     
     func timeSinceStartFormatted() -> Text {

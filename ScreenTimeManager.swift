@@ -33,14 +33,12 @@ class Detox: ObservableObject, Codable {
     @Published var detoxType: DetoxType
     @Published var startDate: Date
     @Published var currentDay: Int = 1
-    @Published var detoxGoals = [DetoxGoal]()
     @Published var isActive = false
     
-    init(detoxType: DetoxType, startDate: Date, currentDay: Int, detoxGoals: [DetoxGoal] = [DetoxGoal](), isActive: Bool) {
+    init(detoxType: DetoxType, startDate: Date, currentDay: Int, isActive: Bool) {
         self.detoxType = detoxType
         self.startDate = startDate
         self.currentDay = currentDay
-        self.detoxGoals = detoxGoals
         self.isActive = isActive
     }
     
@@ -48,7 +46,6 @@ class Detox: ObservableObject, Codable {
         case detoxType
         case startDate
         case currentDay
-        case detoxGoals
         case isActive
     }
     
@@ -57,7 +54,6 @@ class Detox: ObservableObject, Codable {
         detoxType = try container.decode(DetoxType.self, forKey: .detoxType)
         startDate = try container.decode(Date.self, forKey: .startDate)
         currentDay = try container.decode(Int.self, forKey: .currentDay)
-        detoxGoals = try container.decode([DetoxGoal].self, forKey: .detoxGoals)
         isActive = try container.decode(Bool.self, forKey: .isActive)
     }
     
@@ -66,40 +62,7 @@ class Detox: ObservableObject, Codable {
         try container.encode(detoxType, forKey: .detoxType)
         try container.encode(startDate, forKey: .startDate)
         try container.encode(currentDay, forKey: .currentDay)
-        try container.encode(detoxGoals, forKey: .detoxGoals)
         try container.encode(isActive, forKey: .isActive)
-    }
-}
-
-class DetoxGoal: Codable, ObservableObject {
-    @Published var name: String
-    @Published var duration: Int
-    @Published var isCompleted: Bool = false
-    
-    init(name: String, duration: Int, isCompleted: Bool = false) {
-        self.name = name
-        self.duration = duration
-        self.isCompleted = isCompleted
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-        case duration
-        case isCompleted
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        duration = try container.decode(Int.self, forKey: .duration)
-        isCompleted = try container.decode(Bool.self, forKey: .isCompleted)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encode(duration, forKey: .duration)
-        try container.encode(isCompleted, forKey: .isCompleted)
     }
 }
 
@@ -121,12 +84,18 @@ class ScreenTimeManager: Codable {
     
     private static let deviceActivityCenter = DeviceActivityCenter()
     
-    static func requestAuthorization() async {
+    static func requestAuthorization() async -> Bool {
         do {
             try await center.requestAuthorization(for: .individual)
+            try await Task.sleep(nanoseconds: 100_000_000)
+            if center.authorizationStatus == .approved {
+                return true
+            }
         } catch {
             print("Failed to authorize: \(error)")
         }
+        
+        return false
     }
     
     static func setRestriction() {
@@ -139,11 +108,15 @@ class ScreenTimeManager: Codable {
     
     static func removeRestriction() {
         settings.clearAllSettings()
+        deviceActivityCenter.stopMonitoring()
     }
     
     static func startDetox(type: DetoxType) {
         //Start Detox
         settings.clearAllSettings()
+        // Stop any existing monitoring
+        deviceActivityCenter.stopMonitoring()
+        
         
         // Create a schedule based on the detox start and end dates
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: .now)
@@ -172,8 +145,6 @@ class ScreenTimeManager: Codable {
         }
         
         do {
-            // Stop any existing monitoring
-            deviceActivityCenter.stopMonitoring()
             // Start new monitoring
             try deviceActivityCenter.startMonitoring(
                 .activity,

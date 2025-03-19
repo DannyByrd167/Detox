@@ -17,6 +17,8 @@ struct DetoxApp: App {
             if viewModel.hasCompletedOnboarding {
                 if viewModel.currentDetoxType != nil {
                     HomepageView(viewModel: viewModel)
+                } else {
+                    StartDetoxView(onboardingViewModel: viewModel)
                 }
             } else {
                 OnboardingView(viewModel: viewModel)
